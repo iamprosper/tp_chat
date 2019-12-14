@@ -36,9 +36,10 @@
 		        die('Erreur de connexion (' . $this->mysqli->connect_errno . ') '
 		                . $this->mysqli->connect_error);
 		        exit();
-		    }else {
-		    	echo "Server: $server\n User: $user\n Password: $password\n Database: $db\n";
 		    }
+		    // else {
+		    // 	echo "Server: $server\n User: $user\n Password: $password\n Database: $db\n";
+		    // }
 
 		    //Setting the default charset
 		    $this->mysqli->set_charset("utf8");
@@ -61,14 +62,31 @@
 		//Method in charge of running a single query
 		public function runQuery($query)
 		{
-			$result = $this->mysqli->query($query);
-			return array($result,$this->mysqli);
+
+			$query_result = $this->mysqli->query($query);
+
+			// $count_row = $query_result->num_rows;
+
+			// $affected_rows = $this->mysqli->affected_rows;
+
+			// $requestInfo = $this->mysqli->info;
+
+			// $lastInsertID = $this->mysqli->insert_id;
+
+			$mysqli_object = $this->mysqli;
+
+			// return array($query_result, $count_row, $affected_rows, $requestInfo, $lastInsertID, $);
+			if($query_result && $mysqli_object->affected_rows > 0){
+				// echo "yh";
+				return array($query_result, $mysqli_object);
+			}
+			return false;
 		}
 
 		// Method in charge of running multiple queries
 		public function runMultipleQueries($queries){
 			$result = $this->mysqli->multi_query($queries);
-			return result;
+			return $result;
 		}
 
 		// Method in charge of clearing safely the message
@@ -79,27 +97,32 @@
 			return $this->mysqli->real_escape_string($text);
 		}
 
-		public function countRows()
+		/*public function countRows()
 		{
-			return $this->mysqli->num_rows;
+		 	return $this->mysqli->num_rows;
+		}*/
+
+		public function authenticate($login,$password)
+		{
+			return $this->runQuery("SELECT * FROM chat_users WHERE login='".$login."' AND user_password='".$password."'");
 		}
 
-		public function affectedRows()
+		/*public function affectedRows()
 		{
 			// return "Mouse"
 			return $this->mysqli->affected_rows;
-		}
+		}*/
 
-		public function requestInfo()
-		{
-			return $this->mysqli->info;
-		}
+		// public function requestInfo()
+		// {
+		// 	return $this->mysqli->info;
+		// }
 
 		//Methode returning the last id of the object inserted
-		public function lastInsertID()
-		{
-			return $this->mysqli->insert_id;
-		}
+		// public function lastInsertID()
+		// {
+		// 	return $this->mysqli->insert_id;
+		// }
 
 		// Method in charge of counting the number total of fields of a table
 		public function totalCount($fieldname,$tablemame)

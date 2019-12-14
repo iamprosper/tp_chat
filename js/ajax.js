@@ -1,14 +1,16 @@
 $("#login_btn").click(function() {
+	// e.preventDefault();
     
     $.post("./php/scripts/auth.php", {login : $("#username").val(), password : $("#password").val()}, function(data) {
-        if(data == 0) {
+        if(data == false) {
             $("#connexion_error").text("login ou mot de passe invalide!").show();
         }else {
-            window.location = "accueil.php";
+            $("#connexion_error").text("login ou mot de passe invalide!").hide();
+        	console.clear();
+        	console.log(data);
+            window.location = "php/chat_room.php";
         }
     });
 });
-
-$('s')
 
 // var s = new A

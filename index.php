@@ -10,9 +10,9 @@
     </head>
     
     <body>
-        <div class="card shadow-lg o-hidden border-0 my-5">
-            <div class="card-body p-0">
-                <div class="row">
+        <div class="card shadow-lg o-hidden border-0 my-5" id="center">
+            <div class="card-body p-0" id="hole_form">
+                <div class="row" >
                     <div style="" class="col-lg-5">
                         <div class="p-5">
                             <div class="text-center">

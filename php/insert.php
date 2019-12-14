@@ -21,11 +21,20 @@
 	
 	$other_query = "SELECT * FROM chat_users WHERE login='dela' AND user_password='cruz'";
 	
-	// $result = $dbmanager->runQuery($query);
-	$dbmanager->runQuery($query);
+	$result = $dbmanager->runQuery($query);
+	// $dbmanager->runQuery($query);
 
-	$requestInfo = $dbmanager->requestInfo();
-	$affected_rows = $dbmanager->affectedRows();
+
+	$query_result = $result[0];
+
+	$num_rows = $result[1];
+
+	$affected_rows = $result[2];
+
+	$requestInfo = $result[3];
+
+	$requestId = $result[4];
+
 	
 	// $ms = $result[1];
 	// $result = $dbmanager->mysqli->affected_rows;
