@@ -102,6 +102,10 @@
 		 	return $this->mysqli->num_rows;
 		}*/
 
+		public function get_users(){
+			return $this->runQuery("SELECT * FROM chat_users;");
+		}
+
 		public function authenticate($login,$password)
 		{
 			return $this->runQuery("SELECT * FROM chat_users WHERE login='".$login."' AND user_password='".$password."'");

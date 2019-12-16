@@ -1,0 +1,4 @@
+1- Search how to set a modal window
+2- Use the modal window to display the users
+3- When the client clicks on a user he add him to his contacts
+4-When he click on a user in his contacts he can start viewing or writing messages to the user
